@@ -38,6 +38,23 @@ augroup END
 ```
 
   [vim-lsp]: https://github.com/prabirshrestha/vim-lsp
+  
+### Emacs
+
+With [lsp-mode], the only configuration you need is the following:
+
+```emacs-lisp
+(with-eval-after-load 'lsp-mode
+  (add-to-list 'lsp-language-id-configuration
+               '(protobuf-mode . "buf"))
+  (lsp-register-client
+   (make-lsp-client
+    :new-connection (lsp-stdio-connection '("bufls" "serve"))
+    :activation-fn (lsp-activate-on "buf")
+    :server-id 'bufls)))
+```
+
+  [lsp-mode]: https://emacs-lsp.github.io/lsp-mode/
 
 ## Supported features
 
